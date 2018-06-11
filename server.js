@@ -88,7 +88,7 @@ const findSpecificRecord = function () {
   })
 }
 
-const updadeUserPassword = function () {
+const updateUserPassword = function () {
   // update user password
   return User.findOne({ username: 'Kenny_the_boy' })
     .then(function (user) {
@@ -100,17 +100,19 @@ const updadeUserPassword = function () {
         if (err) throw err;
 
         console.log('Uzytkownik ' + user.name + ' zostal pomyslnie zaktualizowany');
-      })
-    })
+      });
+    });
 }
 
 const updateUsername = function () {
   // update username
-  return User.findOneAndUpdate({ username: 'Benny_the_boy' }, { username: 'Benny_the_man' }, { new: true }, function (err, user) {
-    if (err) throw err;
+   setTimeout(() => {
+    return User.findOneAndUpdate({ username: 'Benny_the_boy' }, { username: 'Benny_the_man' }, { new: true }, function (err, user) {
+      if (err) throw err;
 
-    console.log('Nazwa uzytkownika po aktualizacji to ' + user.username);
-  })
+      console.log('Nazwa uzytkownika po aktualizacji to ' + user.username);
+    });
+  }, 0);
 }
 
 const findMarkAndDelete = function () {
@@ -146,7 +148,7 @@ const findBennyAndRemove = function () {
 Promise.all([kenny.save(), mark.save(), benny.save()])
   .then(findAllUsers)
   .then(findSpecificRecord)
-  .then(updadeUserPassword)
+  .then(updateUserPassword)
   .then(updateUsername)
   .then(findMarkAndDelete)
   .then(findKennyAndDelete)
